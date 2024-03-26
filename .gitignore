@@ -13,7 +13,6 @@ awx
 ubuntu-bionic-18.04-cloudimg-console.log
 index.html
 db_datadir
-.env
 ansible-digital_ocean.cache
 
 .idea
