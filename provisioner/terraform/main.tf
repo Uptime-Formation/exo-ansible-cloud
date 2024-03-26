@@ -28,7 +28,7 @@ resource "digitalocean_droplet" "balancers" {
   count = local.haproxy_balancer_count
   name = "balancer${count.index}"
   image = "centos-7-x64"
-  size = "1gb"
+  size = "s-1vcpu-1gb"
   region = "ams3"
   ssh_keys = [var.do_sshkey_id]
 }
@@ -36,20 +36,20 @@ resource "digitalocean_droplet" "balancers" {
 resource "digitalocean_droplet" "appservers" {
   count = local.app_node_count
   name = "appserver${count.index}"
-  image = "ubuntu-18-04-x64"
-  size = "1gb"
+  image = "ubuntu-22-04-x64"
+  size = "s-1vcpu-1gb"
   region = "ams3"
   ssh_keys = [var.do_sshkey_id]
 }
 
-resource "digitalocean_droplet" "awxservers" {
-  count = local.awx_node_count
-  name = "awx${count.index}"
-  image = "ubuntu-18-04-x64"
-  size = "4gb"
-  region = "ams3"
-  ssh_keys = [var.do_sshkey_id]
-}
+# resource "digitalocean_droplet" "awxservers" {
+#   count = local.awx_node_count
+#   name = "awx${count.index}"
+#   image = "ubuntu-18-04-x64"
+#   size = "4gb"
+#   region = "ams3"
+#   ssh_keys = [var.do_sshkey_id]
+# }
 
 
 # # Ansible mirroring hosts section
@@ -75,14 +75,14 @@ resource "ansible_host" "ansible_appservers" {
   }
 }
 
-resource "ansible_host" "ansible_awxservers" {
-  count = local.awx_node_count
-  inventory_hostname = "awx${count.index}"
-  groups = ["awxservers"]
-  vars = {
-    ansible_host = element(digitalocean_droplet.awxservers.*.ipv4_address, count.index)
-  }
-}
+# resource "ansible_host" "ansible_awxservers" {
+#   count = local.awx_node_count
+#   inventory_hostname = "awx${count.index}"
+#   groups = ["awxservers"]
+#   vars = {
+#     ansible_host = element(digitalocean_droplet.awxservers.*.ipv4_address, count.index)
+#   }
+# }
 
 resource "ansible_group" "all" {
   inventory_group_name = "all"
