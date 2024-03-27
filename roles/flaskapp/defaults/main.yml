@@ -1,5 +1,5 @@
 flask_apps:
-  - name: helloworld
+  - name: hellodefault
     domain: hello.test
     repository: https://github.com/e-lie/flask_hello_ansible.git
     version: master

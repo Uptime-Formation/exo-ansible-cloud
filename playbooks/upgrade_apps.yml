@@ -4,7 +4,14 @@
   
   vars:
     flask_upgrade_apps: yes
-    
+    flask_apps:
+    - name: helloworld
+      domain: hello.test
+      repository: https://github.com/e-lie/flask_hello_ansible.git
+      version: version2
+      user: flask1
+      entrypoint: app
+
   pre_tasks:
     - name: Disable the backend server in HAProxy.
       haproxy:
