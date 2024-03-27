@@ -1,14 +1,6 @@
 - hosts: balancers
   become: true
 
-  # static version of backen definition
-  # vars:
-    # haproxy_backend_servers:
-      # - name: app1
-      #   address: 10.164.210.121:80
-      # - name: app2
-      #   address: 10.164.210.122:80
-
   pre_tasks:
 
     # - name: debug task to help build the variable
@@ -24,6 +16,15 @@
       loop: "{{ groups['appservers'] }}"
       loop_control:
         loop_var: host
+
+# TODO: collect all possible app.domain values and setup /etc/hosts automatically
+    # - name: Config /etc/hosts file accordingly
+    #   lineinfile:
+    #     path: /etc/hosts
+    #     regexp: ".* {{ item }}$"
+    #     line: "{{ ansible_host }}    {{ item }}"
+    #     state: "present"
+    #   loop: "{{ all_unique_flask_domains_in_all_appservers_flaskapps_vars }}"
     
   roles:
     - geerlingguy.repo-epel
