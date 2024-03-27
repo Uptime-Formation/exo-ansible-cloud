@@ -36,7 +36,7 @@
     - name: Config /etc/hosts file accordingly
       lineinfile:
         path: /etc/hosts
-        regexp: ".*{{ item }}$"
+        regexp: ".* {{ item }}$"
         line: "{{ hostvars[item].ansible_host }}    {{ item }}"
         state: "present"
       loop: "{{ groups['all'] }}"
