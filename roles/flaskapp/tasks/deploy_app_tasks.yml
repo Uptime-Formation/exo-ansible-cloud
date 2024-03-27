@@ -10,11 +10,6 @@
     groups:
       - "www-data"
 
-- name: quickfix
-  command: git config --global --add safe.directory /home/flask1/helloworld
-- name: quickfix
-  command: git config --global --add safe.directory /home/flask2/hello2
-
 - name: git get app files
   git:
     repo: "{{ app.repository }}"
