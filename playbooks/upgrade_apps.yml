@@ -40,6 +40,6 @@
         socket: /var/lib/haproxy/stats
         backend: habackend
       delegate_to: balancer0
-      loop: "{{ groups.balancers }}"
+      # loop: "{{ groups.balancers }}"
 
 
