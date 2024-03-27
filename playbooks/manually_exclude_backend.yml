@@ -1,10 +1,15 @@
 - hosts: balancers
   become: yes
-  
+  vars_prompt:
+    - name: backend_name
+      prompt: "Quel est le nom du backend à exclure ?"
+
+  vars:
+    backend_state: disabled
   tasks:
     - name: "{{ backend_state }} the backend server in HAProxy."
       haproxy:
         state: "{{ backend_state }}"
-        host: '{{ backend_name }}'
+        host: "{{ backend_name }}"
         socket: /var/lib/haproxy/stats
         backend: habackend
