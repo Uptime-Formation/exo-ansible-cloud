@@ -1,3 +1,0 @@
-awx_admin_password: unsecurepass 
-
-awx_run_install_playbook: yes
