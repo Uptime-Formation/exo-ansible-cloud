@@ -42,6 +42,7 @@
     path: /home/{{ app.user }}/{{ app.name }}
     state: directory
     owner: "{{ app.user }}"
+    group: "www-data"
     recurse: true
 
 - name: template systemd service config
