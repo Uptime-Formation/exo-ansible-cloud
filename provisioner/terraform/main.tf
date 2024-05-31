@@ -20,7 +20,7 @@ provider "digitalocean" {
 
 locals {
   haproxy_balancer_count = 1
-  app_node_count = 3
+  app_node_count = 2
 }
 
 resource "digitalocean_droplet" "balancers" {
