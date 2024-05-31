@@ -19,8 +19,8 @@
         host: '{{ inventory_hostname }}'
         socket: /var/lib/haproxy/stats
         backend: habackend
-      delegate_to: balancer0
-      # loop: "{{ groups.balancers }}"
+      delegate_to: "{{ item }}"
+      loop: "{{ groups.balancers }}"
 
   roles:
     - flaskapp
@@ -39,7 +39,7 @@
         host: '{{ inventory_hostname }}'
         socket: /var/lib/haproxy/stats
         backend: habackend
-      delegate_to: balancer0
-      # loop: "{{ groups.balancers }}"
+      delegate_to: "{{ item }}"
+      loop: "{{ groups.balancers }}"
 
 
